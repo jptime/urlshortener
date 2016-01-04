@@ -1,0 +1,24 @@
+{
+  "name": "urlshorten",
+  "version": "1.0.0",
+  "description": "API to provide a shortened URL.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jptime/urlshortener.git"
+  },
+  "author": "John P",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jptime/urlshortener/issues"
+  },
+  "homepage": "https://github.com/jptime/urlshortener#readme",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "express": "^4.13.3",
+    "mongoose": "^4.3.4"
+  }
+}
