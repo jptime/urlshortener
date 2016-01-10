@@ -85,4 +85,4 @@ app.get('/:link', function(req, res){
     
 })
 
-var server = app.listen(port);
+var server = app.listen(port, function(){});
