@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var app = express();
 var port = process.env.PORT || 8080;
 var Schema = mongoose.Schema;
-mongoose.connect('mongodb://localhost/urlshorten');
+mongoose.connect('mongodb://database:databasepass@ds039185.mongolab.com:39185/urlshorten');
 
 var urlSchema = new Schema({
     original: {type: String, required: true},
@@ -31,7 +31,6 @@ app.get('/new/*', function(req, res){
     var regex = /^(?:(?:(?:https?|ftp?):)?\/?\/?)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/g
     var userUrl = req.params[0];
     
-    console.log(req.params[0])
     if (!userUrl.match(regex)){
         res.send("Please send a valid Url. www.example.com")
     } else {
@@ -42,7 +41,6 @@ app.get('/new/*', function(req, res){
         query.exec(function(err, link){
             if (err){throw err}
             //if the link exists, send them the already existing original and link info
-            console.log(link.length)
             if (link.length > 0){
                 res.send({original: link[0].original, shortened: link[0].shortened})
                 } else {
@@ -73,8 +71,6 @@ app.get('/:link', function(req, res){
     var query = Url.find({shortened: shortenedUrl});
     query.exec(function(err, link){
         if (err){throw err}
-        console.log(link)
-        console.log(link[0])
         if (!link.length){res.send("Invalid Link")
             
         } else {
@@ -85,4 +81,6 @@ app.get('/:link', function(req, res){
     
 })
 
-var server = app.listen(port, function(){});
+var server = app.listen(port, function(){
+
+});
